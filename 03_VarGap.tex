@@ -1,0 +1,85 @@
+\renewcommand{\writetable}[2]
+{ 
+    \begin{figure}[!ht]
+    \centering
+            \pgfplotstabletypeset
+            [
+            columns/gap/.style={column name={Gap}, fixed, precision=2},
+            columns/N_2/.style={column name={n=2} ,sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            columns/N_6/.style={column name={n=6} ,sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            columns/N_10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            columns/N_14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            columns/N_18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            columns/N_22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            columns/N_26/.style={column name={n=26},sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            ]{#1}  
+            \caption{#2 x Dimensão do problema.}
+    \end{figure}
+}
+
+\section{Variação do Gap de Dualidade}
+
+    \subsection{Tempo de Processamento para a análise da variação do gap de dualidade para diferentes dimensões para o algoritmo de Pontos Interiores} 
+            \writetable{data/data13_tbl_gap_tempo.txt}{Tempo} 
+
+    \subsection{Número de iterações para a análise da variação do gap de dualidade para diferentes dimensões para o algoritmo de Pontos Interiores} 
+            \writetable{data/data14_tbl_gap_N_iter.txt}{Tempo} 
+ 
+
+            \FloatBarrier 
+        \begin{figure}[h!]
+            \begin{subfigure}{0.5\textwidth}
+                \centering
+                \begin{tikzpicture}[scale=0.8]
+                    \begin{axis}[
+                        ymin=-2.7e-3,
+                        xlabel={Dimensão},
+                        ylabel={Tempo de execução [S]},
+                        title={Dimensão x Tempo},
+                        legend pos=south east,
+                        legend entries={{gap=1e-1},{gap=1e-2},{gap=1e-4},{gap=1e-6},{gap=1e-8},{gap=1e-10}},
+                        ymajorgrids=true]
+                        \addplot table [x=n,y=0.1]{data/data13b_plt_gap_tempo.txt};
+                        \addplot table [x=n,y=0.01]{data/data13b_plt_gap_tempo.txt};
+                        \addplot table [x=n,y=0.0001]{data/data13b_plt_gap_tempo.txt};
+                        \addplot table [x=n,y=0.000001]{data/data13b_plt_gap_tempo.txt};
+                        \addplot table [x=n,y=0.00000001]{data/data13b_plt_gap_tempo.txt};
+                        \addplot table [x=n,y=1E-10]{data/data13b_plt_gap_tempo.txt};
+                    \end{axis}           
+                \end{tikzpicture}
+                \caption{ }
+                \label{fig:subim1}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}{0.5\textwidth}
+                \centering
+                \begin{tikzpicture}[scale=0.8]
+                    \begin{axis}[
+                        ymin=0,
+                        xlabel={Dimensão},
+                        ylabel={Número de Iterações},
+                        title={Dimensão x Iteração},
+                        legend pos=south east,
+                        legend entries={{gap=1e-1},{gap=1e-2},{gap=1e-4},{gap=1e-6},{gap=1e-8},{gap=1e-10}},
+                        ymajorgrids=true]
+                        \addplot table [x=n,y=0.1]{data/data14b_plt_gap_N_iter.txt};
+                        \addplot table [x=n,y=0.01]{data/data14b_plt_gap_N_iter.txt};
+                        \addplot table [x=n,y=0.0001]{data/data14b_plt_gap_N_iter.txt};
+                        \addplot table [x=n,y=0.000001]{data/data14b_plt_gap_N_iter.txt};
+                        \addplot table [x=n,y=0.00000001]{data/data14b_plt_gap_N_iter.txt};
+                        \addplot table [x=n,y=1E-10]{data/data14b_plt_gap_N_iter.txt};
+                    \end{axis}           
+                \end{tikzpicture}
+                \caption{ }
+                \label{fig:subim2}
+            \end{subfigure}        
+            \caption{Análise da sensibilidade do passo (a) Tempo de processamento (b) Número de Iterações.}
+            \label{fig:image2}
+        \end{figure}
+    \FloatBarrier
+
+\subsection{Conclusão}
+
+
+    
+\newpage

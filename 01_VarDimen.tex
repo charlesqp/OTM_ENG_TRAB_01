@@ -1,0 +1,99 @@
+%% Parte 1
+\newcommand{\writetable}[2]
+{ 
+    \begin{figure}[!ht] 
+    \centering
+            \pgfplotstabletypeset
+            [
+                columns/freq/.style={column name=Dim, fixed, precision=1},
+                columns/conc/.style={column name=Simplex,sci,sci zerofill,sci sep align,precision=1,sci superscript},
+                columns/lino/.style={column name=PI,sci,sci zerofill,sci sep align,precision=1,sci superscript},
+                columns/lino/.style={column name=Hibrido,sci,sci zerofill,sci sep align,precision=1,sci superscript},
+            ]{#1}  
+            \caption{#2 x Dimensão do problema.}
+    \end{figure}
+}
+
+\newcommand{\plotline}[3]
+{
+    \begin{tikzpicture}[scale=0.6]
+        \begin{axis}[
+            xlabel={Dimensão},
+            ylabel={Tempo de execução [S]},
+            ymode=log,
+            title={#3},
+            legend pos=south east,
+            legend entries={#2},ymajorgrids=true]
+            \addplot table [x=Dim,y=#2]{#1};
+        \end{axis}           
+    \end{tikzpicture}
+}
+
+\section{Variação da Dimensão no espaço}
+    \subsection{Tempo de execução X Dimensão do Problema}    
+        \FloatBarrier
+        \def \namefilepath {data/data01_tbl_dim_tempo.txt}
+        \writetable{\namefilepath}{Tempo de execução}
+        \begin{figure}[h!]
+            \begin{subfigure}{0.3\textwidth}
+                \centering
+                \plotline{\namefilepath}{Simplex}{Tempo x Dimensão}
+                \caption{Simplex}
+                \label{fig:subim1}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}{0.3\textwidth}
+                \centering
+                \plotline{\namefilepath}{PI}{Tempo x Dimensão}
+                \caption{PI}
+                \label{fig:subim2}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}{0.3\textwidth}
+                \centering
+                \plotline{\namefilepath}{Hibrido}{Tempo x Dimensão}
+                \caption{Hibrido}
+                \label{fig:subim3}
+            \end{subfigure}
+            \caption{Custo computacional em função da dimensão do problema sob o ponto de vista do tempo de processamento (a) SIMPLEX, (b) Pontos Interiores, (c) Híbrido.}
+            \label{fig:image2}
+        \end{figure}
+        \FloatBarrier
+    \subsection{Número de iterações X Dimensão do Problema}    
+        \FloatBarrier
+        \def \namefilepath {data/data02_tbl_dim_N_Iter.txt}
+        \writetable{\namefilepath }{Número de iterações}
+        \begin{figure}[h!]
+            \begin{subfigure}{0.3\textwidth}
+                \centering
+                \plotline{\namefilepath }{Simplex}{Iterações x Dimensão}
+                \caption{Simplex}
+                \label{fig:subim1}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}{0.3\textwidth}
+                \centering
+                \plotline{\namefilepath }{PI}{Iterações x Dimensão}
+                \caption{PI}
+                \label{fig:subim2}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}{0.3\textwidth}
+                \centering
+                \plotline{\namefilepath }{Hibrido}{Iterações x Dimensão}
+                \caption{Hibrido}
+                \label{fig:subim3}
+            \end{subfigure}
+            \caption{Custo computacional em função da dimensão do problema sob o ponto de vista do número de iterações (a) SIMPLEX, (b) Pontos Interiores, (c) Híbrido.}
+            \label{fig:image2}
+        \end{figure}        
+        \FloatBarrier
+    \subsection{Erro percentual da função objetivo X Dimensão do Problema}
+        \writetable{data/data03_tbl_err_perc_fobj.txt}{Erro percentual da função objetivo}
+    \subsection{Erro percentual da solução X Dimensão do Problema}
+        \writetable{data/data04_tbl_err_perc_sol.txt}{Erro percentual da solução}
+    \subsection{Conclusão}
+
+
+    
+    \newpage
