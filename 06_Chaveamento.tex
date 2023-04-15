@@ -1,0 +1,91 @@
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset[
+        column type=l,
+        every head row/.style={
+            before row={
+            \toprule
+            \multirow{2}{*}{ } & \multicolumn{2}{c}{Iterações} & \multicolumn{2}{c}{Tempo} & \multicolumn{2}{c}{Erro Função obj (\%)} & \multicolumn{2}{c}{Erro Solução (\%)} \\
+            },
+        after row=\midrule,
+        },
+        every last row/.style={
+            after row=\bottomrule
+        },
+        columns/Dim/.style ={column name=Dim, fixed, precision=2},
+        columns/IteraçõesSimplex/.style ={column name=Simplex, fixed, precision=2},
+        columns/IteraçõesPI/.style ={column name=PI, fixed, precision=2},
+        columns/TempoSimplex/.style ={column name=Simplex},
+        columns/TempoPI/.style ={column name=PI},
+        columns/ErroFobjSimplex/.style ={column name=Simplex},
+        columns/ErroFobjPI/.style ={column name=PI,sci,sci zerofill,sci sep align,precision=2,sci superscript},
+        columns/ErroSolSimplex/.style ={column name=Simplex},
+        columns/ErroSolPI/.style ={column name=PI,sci,sci zerofill,sci sep align,precision=2,sci superscript},
+        string type,
+    ]{data/data19_tbl_chaveamento.txt}
+            \caption{Resultados relacionados ao esforço computacional para o algoritmo Híbrido (Detalhamento dos métodos de Pontos Interiores e SIMPLEX).}
+    \end{figure}
+
+\begin{figure}[H]  
+  \begin{minipage}[b]{0.5\linewidth}
+    \begin{tikzpicture}[scale=0.8]
+        \begin{axis}[
+            xlabel={Dimensão},
+            ylabel={Iterações},
+            ymode=log,
+            %title={Número de iterações},
+            legend pos=north west,
+            legend entries={{Simplex},{PI}},ymajorgrids=true]
+            \addplot table [x=Dim,y=IteraçõesSimplex]{data/data19_tbl_chaveamento.txt};
+            \addplot table [x=Dim,y=IteraçõesPI]{data/data19_tbl_chaveamento.txt};
+        \end{axis}           
+    \end{tikzpicture} 
+    \caption{Dimensão x Iteração} 
+  \end{minipage} 
+  \begin{minipage}[b]{0.5\linewidth}
+    \begin{tikzpicture}[scale=0.8]
+        \begin{axis}[
+            xlabel={Dimensão},
+            ylabel={Tempo [S]},
+            ymode=log,
+            %title={Tempo de execução},
+            legend pos=north west,
+            legend entries={{Simplex},{PI}},ymajorgrids=true]
+            \addplot table [x=Dim,y=TempoSimplex]{data/data19_tbl_chaveamento.txt};
+            \addplot table [x=Dim,y=TempoPI]{data/data19_tbl_chaveamento.txt};
+        \end{axis}           
+    \end{tikzpicture}
+    \caption{Dimensão x Tempo} 
+  \end{minipage} 
+  \begin{minipage}[b]{0.5\linewidth}
+    \begin{tikzpicture}[scale=0.8]
+        \begin{axis}[
+            xlabel={Dimensão},
+            ylabel={Erro [\%]},
+            ymax=10e-8,
+            %title={Erro \% da Função Objetivo},
+            legend pos=north west,
+            legend entries={{Simplex},{PI}},ymajorgrids=true]
+            \addplot table [x=Dim,y=ErroFobjSimplex]{data/data19_tbl_chaveamento.txt};
+            \addplot table [x=Dim,y=ErroFobjPI]{data/data19_tbl_chaveamento.txt};
+        \end{axis}           
+    \end{tikzpicture}[scale=0.8]
+    \caption{Dimensão x Erro \% da Função Objetivo} 
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.5\linewidth}
+        \begin{tikzpicture}[scale=0.8]
+        \begin{axis}[
+            xlabel={Dimensão},
+            ylabel={Erro [\%]},
+            ymax=10e-8,
+            %title={Erro \% da Solução},
+            legend pos=north west,
+            legend entries={{Simplex},{PI}},ymajorgrids=true]
+            \addplot table [x=Dim,y=ErroSolSimplex]{data/data19_tbl_chaveamento.txt};
+            \addplot table [x=Dim,y=ErroSolPI]{data/data19_tbl_chaveamento.txt};
+        \end{axis}           
+    \end{tikzpicture}  
+    \caption{Dimensão x Erro \% da Solução} 
+  \end{minipage} 
+\end{figure}

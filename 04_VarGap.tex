@@ -1,33 +1,29 @@
 \renewcommand{\writetable}[2]
 { 
-    \begin{figure}[!ht]
+    \begin{figure}[H]
     \centering
             \pgfplotstabletypeset
             [
             columns/gap/.style={column name={Gap}, fixed, precision=2},
-            columns/N_2/.style={column name={n=2} ,sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_6/.style={column name={n=6} ,sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_26/.style={column name={n=26},sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            columns/N_2/.style={column name={n=2} ,sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_6/.style={column name={n=6} ,sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_26/.style={column name={n=26},sci,sci zerofill,sci sep align,precision=2,sci superscript},
             ]{#1}  
             \caption{#2 x Dimensão do problema.}
     \end{figure}
 }
 
-\section{Variação do Gap de Dualidade}
-
-    \subsection{Tempo de Processamento para a análise da variação do gap de dualidade para diferentes dimensões para o algoritmo de Pontos Interiores} 
+    \subsubsection{Tempo de Processamento para a análise da variação do gap de dualidade para diferentes dimensões para o algoritmo de Pontos Interiores} 
             \writetable{data/data13_tbl_gap_tempo.txt}{Tempo} 
 
-    \subsection{Número de iterações para a análise da variação do gap de dualidade para diferentes dimensões para o algoritmo de Pontos Interiores} 
+    \subsubsection{Número de iterações para a análise da variação do gap de dualidade para diferentes dimensões para o algoritmo de Pontos Interiores} 
             \writetable{data/data14_tbl_gap_N_iter.txt}{Tempo} 
- 
 
-            \FloatBarrier 
-        \begin{figure}[h!]
+        \begin{figure}[H]
             \begin{subfigure}{0.5\textwidth}
                 \centering
                 \begin{tikzpicture}[scale=0.8]
@@ -48,7 +44,7 @@
                     \end{axis}           
                 \end{tikzpicture}
                 \caption{ }
-                \label{fig:subim1}
+                \label{fig:var_gap_tempo_PI}
             \end{subfigure}
             \hfill
             \begin{subfigure}{0.5\textwidth}
@@ -71,15 +67,14 @@
                     \end{axis}           
                 \end{tikzpicture}
                 \caption{ }
-                \label{fig:subim2}
+                \label{fig:var_gap_Iter_PI}
             \end{subfigure}        
-            \caption{Análise da sensibilidade do passo (a) Tempo de processamento (b) Número de Iterações.}
-            \label{fig:image2}
+            \caption{Análise da sensibilidade do gap (a) Tempo de processamento (b) Número de Iterações.}
+            \label{fig:var_gap_PI}
         \end{figure}
-    \FloatBarrier
 
-\subsection{Conclusão}
-
-
+\subsubsection{Erro percentual da função objetivo para o algoritmo de Pontos Interiores}
+    \writetable{data/data20_tbl_gap_err_per_fobj.txt}{Erro percentual da função objetivo}
     
-\newpage
+\subsubsection{Erro percentual da solução para o algoritmo de Pontos Interiores}
+    \writetable{data/data21_tbl_gap_err_per_sol.txt}{Erro percentual da solução}

@@ -1,0 +1,432 @@
+\subsubsection{Tempo de Processamento para a análise da variação do parâmetro valb para diferentes dimensões}    
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/4/.style={column name={n=4},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/6/.style={column name={n=6},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/20/.style={column name={n=20},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/24/.style={column name={n=24},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+        ]{datavalb/01_valb_time_Simplex.txt}  
+    \caption{Tempo de execução x Dimensão do problema para o algoritmo Simplex.}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/4/.style={column name={n=4},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/6/.style={column name={n=6},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/20/.style={column name={n=20},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/24/.style={column name={n=24},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+        ]{datavalb/01_valb_time_PI.txt}  
+    \caption{Tempo de execução x Dimensão do problema para o algoritmo de Pontos Interiores.}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/4/.style={column name={n=4},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/6/.style={column name={n=6},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/20/.style={column name={n=20},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/24/.style={column name={n=24},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+        ]{datavalb/01_valb_time_Hibrido.txt}  
+    \caption{Tempo de execução x Dimensão do problema para o algoritmo Híbrido.}
+\end{figure}
+ 
+\begin{figure}[H]
+    \begin{subfigure}{0.45\textwidth}
+        %\centering
+        \def\filename{datavalb/01_valb_time_Simplex.txt}  
+        \begin{tikzpicture}[scale=0.85]
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Tempo de execução [S]},
+                title={valb x Tempo},
+                ymode=log,
+                ymax=10^3,
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{Simplex}
+        \label{fig:vardim_tempo_S}
+    \end{subfigure}
+    \hfill
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+       % \centering
+        \def\filename{datavalb/01_valb_time_PI.txt}  
+        \begin{tikzpicture}[scale=0.85] 
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Tempo de execução [S]},
+                title={valb x Tempo},
+                ymode=log,
+                %ymax=10^3,
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{PI}
+        \label{fig:vardim_tempo_PI}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.45\textwidth}
+        % \centering
+        \def\filename{datavalb/01_valb_time_Hibrido.txt}  
+        \begin{tikzpicture}[scale=0.85] 
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Tempo de execução [S]},
+                title={valb x Tempo},
+                ymode=log,
+                %ymax=10^3,
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{Hibrido}
+        \label{fig:vardim_tempo_H}
+    \end{subfigure}
+    \caption{Custo computacional em função da dimensão do problema sob o ponto de vista do tempo de processamento (a) SIMPLEX, (b) Pontos Interiores, (c) Híbrido.}
+    \label{fig:vardim_tempo}
+\end{figure}
+
+\subsubsection{Número de iterações para a análise da variação do parâmetro valb para diferentes dimensões} 
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},fixed, precision=2},
+            columns/4/.style={column name={n=4},fixed, precision=2},
+            columns/6/.style={column name={n=6},fixed, precision=2},
+            columns/10/.style={column name={n=10},fixed, precision=2},
+            columns/14/.style={column name={n=14},fixed, precision=2},
+            columns/18/.style={column name={n=18},fixed, precision=2},
+            columns/20/.style={column name={n=20},fixed, precision=2},
+            columns/22/.style={column name={n=22},fixed, precision=2},
+            columns/24/.style={column name={n=24},fixed, precision=2},
+        ]{datavalb/02_valb_iter_Simplex.txt}  
+    \caption{Número de Iterações x Dimensão do problema para o algoritmo Simplex.}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},fixed, precision=2},
+            columns/4/.style={column name={n=4},fixed, precision=2},
+            columns/6/.style={column name={n=6},fixed, precision=2},
+            columns/10/.style={column name={n=10},fixed, precision=2},
+            columns/14/.style={column name={n=14},fixed, precision=2},
+            columns/18/.style={column name={n=18},fixed, precision=2},
+            columns/20/.style={column name={n=20},fixed, precision=2},
+            columns/22/.style={column name={n=22},fixed, precision=2},
+            columns/24/.style={column name={n=24},fixed, precision=2},
+        ]{datavalb/02_valb_iter_PI.txt}  
+    \caption{Número de Iterações x Dimensão do problema para o algoritmo de Pontos Interiores.}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},fixed, precision=2},
+            columns/4/.style={column name={n=4},fixed, precision=2},
+            columns/6/.style={column name={n=6},fixed, precision=2},
+            columns/10/.style={column name={n=10},fixed, precision=2},
+            columns/14/.style={column name={n=14},fixed, precision=2},
+            columns/18/.style={column name={n=18},fixed, precision=2},
+            columns/20/.style={column name={n=20},fixed, precision=2},
+            columns/22/.style={column name={n=22},fixed, precision=2},
+            columns/24/.style={column name={n=24},fixed, precision=2},
+        ]{datavalb/02_valb_iter_Hibrido.txt}  
+    \caption{Número de Iterações x Dimensão do problema para o algoritmo Híbrido.}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{subfigure}{0.45\textwidth}
+        %\centering
+        \def\filename{datavalb/02_valb_iter_Simplex.txt}  
+        \begin{tikzpicture}[scale=0.85]
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Iterações},
+                title={valb x Iterações},
+                ymode=log,
+                %ymax=10^3,
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{Simplex}
+        \label{fig:vardim_tempo_S}
+    \end{subfigure}
+    \hfill
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+       % \centering
+        \def\filename{datavalb/02_valb_iter_PI.txt}  
+        \begin{tikzpicture}[scale=0.85] 
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Iterações},
+                title={valb x Iterações},
+                ymode=log,
+                ymin=10^0,
+                ymax=10^2,
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{PI}
+        \label{fig:vardim_tempo_PI}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.45\textwidth}
+        % \centering
+        \def\filename{datavalb/02_valb_iter_Hibrido.txt}  
+        \begin{tikzpicture}[scale=0.85] 
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Iterações},
+                title={valb x Iterações},
+                ymode=log,
+                ymin=10^0,
+                ymax=10^2,
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{Hibrido}
+        \label{fig:vardim_tempo_H}
+    \end{subfigure}
+    \caption{Custo computacional em função da dimensão do problema sob o ponto de vista do tempo de processamento (a) SIMPLEX, (b) Pontos Interiores, (c) Híbrido.}
+    \label{fig:vardim_tempo}
+\end{figure}
+
+\subsubsection{Erro percentual da função objetivo para a análise da variação do parâmetro valb para diferentes dimensões}
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},fixed, precision=2},
+            columns/4/.style={column name={n=4},fixed, precision=2},
+            columns/6/.style={column name={n=6},fixed, precision=2},
+            columns/10/.style={column name={n=10},fixed, precision=2},
+            columns/14/.style={column name={n=14},fixed, precision=2},
+            columns/18/.style={column name={n=18},fixed, precision=2},
+            columns/20/.style={column name={n=20},fixed, precision=2},
+            columns/22/.style={column name={n=22},fixed, precision=2},
+            columns/24/.style={column name={n=24},fixed, precision=2},
+        ]{datavalb/03_valb_EFobj_Simplex.txt}  
+    \caption{Erro percentual da função objetivo x Dimensão do problema para o algoritmo Simplex.}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/4/.style={column name={n=4},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/6/.style={column name={n=6},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/20/.style={column name={n=20},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/24/.style={column name={n=24},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+        ]{datavalb/03_valb_EFobj_PI.txt}  
+    \caption{Erro percentual da função objetivo x Dimensão do problema para o algoritmo de Pontos Interiores.}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \pgfplotstabletypeset
+        [
+            columns/valb/.style={column name=valb, fixed, precision=2},
+            columns/2/.style={column name={n=2},fixed, precision=2},
+            columns/4/.style={column name={n=4},fixed, precision=2},
+            columns/6/.style={column name={n=6},fixed, precision=2},
+            columns/10/.style={column name={n=10},fixed, precision=2},
+            columns/14/.style={column name={n=14},fixed, precision=2},
+            columns/18/.style={column name={n=18},fixed, precision=2},
+            columns/20/.style={column name={n=20},fixed, precision=2},
+            columns/22/.style={column name={n=22},fixed, precision=2},
+            columns/24/.style={column name={n=24},fixed, precision=2},
+        ]{datavalb/03_valb_EFobj_Hibrido.txt}  
+    \caption{Erro percentual da função objetivo x Dimensão do problema para o algoritmo Híbrido.}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{subfigure}{0.45\textwidth}
+        %\centering
+        \def\filename{datavalb/03_valb_EFobj_Simplex.txt}  
+        \begin{tikzpicture}[scale=0.85]
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Erro [\%]},
+                title={valb x Erro da função objetivo},
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{Simplex}
+        \label{fig:vardim_tempo_S}
+    \end{subfigure}
+    \hfill
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+       % \centering
+        \def\filename{datavalb/03_valb_EFobj_PI.txt}  
+        \begin{tikzpicture}[scale=0.85] 
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Erro [\%]},
+                title={valb x Erro da função objetivo},
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{PI}
+        \label{fig:vardim_tempo_PI}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.45\textwidth}
+        % \centering
+        \def\filename{datavalb/03_valb_EFobj_Hibrido.txt}  
+        \begin{tikzpicture}[scale=0.85] 
+            \begin{axis}[
+                xlabel={valb},
+                ylabel={Erro [\%]},
+                title={valb x Erro da função objetivo},
+                legend pos=outer north east,
+                legend entries={{n=2},{n=4},{n=6},{n=10},{n=14},{n=18},{n=20},{n=22},{n=24}},
+                ymajorgrids=true]
+                \addplot table [x=valb,y=2]\filename ;
+                \addplot table [x=valb,y=4]\filename ;
+                \addplot table [x=valb,y=6]\filename ;
+                \addplot table [x=valb,y=10]\filename ;
+                \addplot table [x=valb,y=14]\filename ;
+                \addplot table [x=valb,y=18]\filename ;
+                \addplot table [x=valb,y=20]\filename ;
+                \addplot table [x=valb,y=22]\filename ;
+                \addplot table [x=valb,y=24]\filename ;
+            \end{axis} 
+        \end{tikzpicture}
+        \caption{Hibrido}
+        \label{fig:vardim_tempo_H}
+    \end{subfigure}
+    \caption{Custo computacional em função da dimensão do problema sob o ponto de vista do tempo de processamento (a) SIMPLEX, (b) Pontos Interiores, (c) Híbrido.}
+    \label{fig:vardim_tempo}
+\end{figure}
+
+\subsubsection{Erro percentual da solução para a análise da variação do parâmetro valb para diferentes dimensões}

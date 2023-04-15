@@ -1,34 +1,30 @@
 \renewcommand{\writetable}[2]
 { 
-    \begin{figure}[!ht]
+    \begin{figure}[H]
     \centering
             \pgfplotstabletypeset
             [
             columns/Passo/.style={fixed, precision=2},
-            columns/N_2/.style={column name={n=2} ,sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_6/.style={column name={n=6} ,sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=3,sci superscript},
-            columns/N_26/.style={column name={n=26},sci,sci zerofill,sci sep align,precision=3,sci superscript},
+            columns/N_2/.style={column name={n=2} ,sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_6/.style={column name={n=6} ,sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_10/.style={column name={n=10},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_14/.style={column name={n=14},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_18/.style={column name={n=18},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_22/.style={column name={n=22},sci,sci zerofill,sci sep align,precision=2,sci superscript},
+            columns/N_26/.style={column name={n=26},sci,sci zerofill,sci sep align,precision=2,sci superscript},
             ]{#1}  
             \caption{#2 x Dimensão do problema.}
     \end{figure}
 }
- 
 
-\section{Variação do Passo}
-
-    \subsection{Tempo de Processamento para a análise da variação do passo para diferentes dimensões para o algoritmo de Pontos Interiores}    
-        \writetable{data/data05_tbl_passo_tempo.txt}{Tempo} 
+\subsubsection{Tempo de Processamento para a análise da variação do passo para diferentes dimensões para o algoritmo de Pontos Interiores}    
+    \writetable{data/data05_tbl_passo_tempo.txt}{Tempo} 
         
-    \subsection{Número de iterações para a análise da variação do passo para diferentes dimensões para o algoritmo de Pontos Interiores}    
+\subsubsection{Número de iterações para a análise da variação do passo para diferentes dimensões para o algoritmo de Pontos Interiores}    
 
     \writetable{data/data06_tbl_passo_N_iter.txt}{Número de iterações}
 
-    \FloatBarrier 
-        \begin{figure}[h!]
+        \begin{figure}[H]
             \begin{subfigure}{0.5\textwidth}
                 \centering
                 \begin{tikzpicture}[scale=0.8]
@@ -51,7 +47,7 @@
                     \end{axis}           
                 \end{tikzpicture}
                 \caption{ }
-                \label{fig:subim1}
+                \label{fig:varpasso_tempo_PI}
             \end{subfigure}
             \hfill
             \begin{subfigure}{0.5\textwidth}
@@ -76,88 +72,14 @@
                     \end{axis}           
                 \end{tikzpicture}
                 \caption{ }
-                \label{fig:subim2}
+                \label{fig:varpasso_Iter_PI}
             \end{subfigure}        
             \caption{Análise da sensibilidade do passo (a) Tempo de processamento (b) Número de Iterações.}
-            \label{fig:image2}
+            %\label{fig:image2}
         \end{figure}
-    \FloatBarrier
  
-    \subsection{Erro percentual da função objetivo para o algoritmo de Pontos Interiores}
-        \writetable{data/data07_tbl_passo_err_perc_fobj.txt}{Erro percentual da função objetivo}
+\subsubsection{Erro percentual da função objetivo para o algoritmo de Pontos Interiores}
+    \writetable{data/data07_tbl_passo_err_perc_fobj.txt}{Erro percentual da função objetivo}
     
-    \subsection{Erro percentual da solução para o algoritmo de Pontos Interiores}
-         \writetable{data/data08_tbl_passo_err_perc_sol.txt}{Erro percentual da solução}
-
-    \subsection{Tempo de Processamento para a análise da variação do passo para diferentes dimensões para o algoritmo Híbrido} 
-     \writetable{data/data09_tbl_passo_tempoH.txt}{Tempo} 
-
-    \subsection{Número de iterações para a análise da variação do passo para diferentes dimensões para o algoritmo Híbrido} 
-    \writetable{data/data10_tbl_passo_N_iterH.txt}{Número de iterações} 
-
-
-    \FloatBarrier 
-        \begin{figure}[h!]
-            \begin{subfigure}{0.5\textwidth}
-                \centering
-                \begin{tikzpicture}[scale=0.8]
-                    \begin{axis}[
-                        ymin=-2.7e-3,
-                        xlabel={Dimensão},
-                        ylabel={Tempo de execução [S]},
-                        title={Dimensão x Tempo},
-                        legend pos=south east,
-                        legend entries={{passo=0.1},{passo=0.3},{passo=0.5},{passo=0.7},{passo=0.8},{passo=0.9},{passo=0.95},{passo=0.99}},
-                        ymajorgrids=true]
-                        \addplot table [x=n,y=0.1]{data/data09b_plt_passo_tempoH.txt};
-                        \addplot table [x=n,y=0.3]{data/data09b_plt_passo_tempoH.txt};
-                        \addplot table [x=n,y=0.5]{data/data09b_plt_passo_tempoH.txt};
-                        \addplot table [x=n,y=0.7]{data/data09b_plt_passo_tempoH.txt};
-                        \addplot table [x=n,y=0.8]{data/data09b_plt_passo_tempoH.txt};
-                        \addplot table [x=n,y=0.9]{data/data09b_plt_passo_tempoH.txt};
-                        \addplot table [x=n,y=0.95]{data/data09b_plt_passo_tempoH.txt};
-                        \addplot table [x=n,y=0.99]{data/data09b_plt_passo_tempoH.txt};
-                    \end{axis}           
-                \end{tikzpicture}
-                \caption{ }
-                \label{fig:subim1}
-            \end{subfigure}
-            \hfill
-            \begin{subfigure}{0.5\textwidth}
-                \centering
-                \begin{tikzpicture}[scale=0.8]
-                    \begin{axis}[
-                        ymin=0,
-                        xlabel={Dimensão},
-                        ylabel={Número de Iterações},
-                        title={Dimensão x Iteração},
-                        legend pos=south east,
-                        legend entries={{passo=0.1},{passo=0.3},{passo=0.5},{passo=0.7},{passo=0.8},{passo=0.9},{passo=0.95},{passo=0.99}},
-                        ymajorgrids=true]
-                        \addplot table [x=n,y=0.1]{data/data10b_plt_passo_N_iterH.txt};
-                        \addplot table [x=n,y=0.3]{data/data10b_plt_passo_N_iterH.txt};
-                        \addplot table [x=n,y=0.5]{data/data10b_plt_passo_N_iterH.txt};
-                        \addplot table [x=n,y=0.7]{data/data10b_plt_passo_N_iterH.txt};
-                        \addplot table [x=n,y=0.8]{data/data10b_plt_passo_N_iterH.txt};
-                        \addplot table [x=n,y=0.9]{data/data10b_plt_passo_N_iterH.txt};
-                        \addplot table [x=n,y=0.95]{data/data10b_plt_passo_N_iterH.txt};
-                        \addplot table [x=n,y=0.99]{data/data10b_plt_passo_N_iterH.txt};
-                    \end{axis}           
-                \end{tikzpicture}
-                \caption{ }
-                \label{fig:subim2}
-            \end{subfigure}        
-            \caption{Análise da sensibilidade do passo (a) Tempo de processamento (b) Número de Iterações.}
-            \label{fig:image2}
-        \end{figure}
-    \FloatBarrier
- 
-    \subsection{Erro percentual da função objetivo para o algoritmo Híbrido} 
-    \writetable{data/data11_tbl_passo_err_perc_fobjH.txt}{Tempo} 
-    
-    \subsection{Erro percentual da solução para o algoritmo Híbrido}
-    \writetable{data/data12_tbl_passo_err_perc_solH.txt}{Tempo} 
-    
-    \subsection{Conclusão}
-    
-    \newpage
+\subsubsection{Erro percentual da solução para o algoritmo de Pontos Interiores}
+    \writetable{data/data08_tbl_passo_err_perc_sol.txt}{Erro percentual da solução}

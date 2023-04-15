@@ -1,14 +1,14 @@
 %% Parte 1
 \newcommand{\writetable}[2]
 { 
-    \begin{figure}[!ht] 
+    \begin{figure}[H] 
     \centering
             \pgfplotstabletypeset
             [
-                columns/freq/.style={column name=Dim, fixed, precision=1},
-                columns/conc/.style={column name=Simplex,sci,sci zerofill,sci sep align,precision=1,sci superscript},
-                columns/lino/.style={column name=PI,sci,sci zerofill,sci sep align,precision=1,sci superscript},
-                columns/lino/.style={column name=Hibrido,sci,sci zerofill,sci sep align,precision=1,sci superscript},
+                columns/freq/.style={column name=Dim, fixed, precision=2},
+                columns/conc/.style={column name=Simplex,sci,sci zerofill,sci sep align,precision=2,sci superscript},
+                columns/lino/.style={column name=PI,sci,sci zerofill,sci sep align,precision=2,sci superscript},
+                columns/lino/.style={column name=Hibrido,sci,sci zerofill,sci sep align,precision=2,sci superscript},
             ]{#1}  
             \caption{#2 x Dimensão do problema.}
     \end{figure}
@@ -21,79 +21,93 @@
             xlabel={Dimensão},
             ylabel={Tempo de execução [S]},
             ymode=log,
+            ymin=10e-5,
+            ymax=10e3,
             title={#3},
-            legend pos=south east,
+            legend pos=north west,
             legend entries={#2},ymajorgrids=true]
             \addplot table [x=Dim,y=#2]{#1};
         \end{axis}           
     \end{tikzpicture}
 }
 
-\section{Variação da Dimensão no espaço}
-    \subsection{Tempo de execução X Dimensão do Problema}    
-        \FloatBarrier
+\newcommand{\plotlineI}[3]
+{
+    \begin{tikzpicture}[scale=0.6]
+        \begin{axis}[
+            xlabel={Dimensão},
+            ylabel={Iterações},
+            ymode=log,
+            ymin=10e-2,
+            ymax=10e8,
+            title={#3},
+            legend pos=north west,
+            legend entries={#2},ymajorgrids=true]
+            \addplot table [x=Dim,y=#2]{#1};
+        \end{axis}           
+    \end{tikzpicture}
+}
+
+
+    \subsubsection{Tempo de execução X Dimensão do Problema}    
+        
         \def \namefilepath {data/data01_tbl_dim_tempo.txt}
         \writetable{\namefilepath}{Tempo de execução}
-        \begin{figure}[h!]
+        \begin{figure}[H]
             \begin{subfigure}{0.3\textwidth}
                 \centering
                 \plotline{\namefilepath}{Simplex}{Tempo x Dimensão}
                 \caption{Simplex}
-                \label{fig:subim1}
+                \label{fig:vardim_tempo_S}
             \end{subfigure}
             \hfill
             \begin{subfigure}{0.3\textwidth}
                 \centering
                 \plotline{\namefilepath}{PI}{Tempo x Dimensão}
                 \caption{PI}
-                \label{fig:subim2}
+                \label{fig:vardim_tempo_PI}
             \end{subfigure}
             \hfill
             \begin{subfigure}{0.3\textwidth}
                 \centering
                 \plotline{\namefilepath}{Hibrido}{Tempo x Dimensão}
                 \caption{Hibrido}
-                \label{fig:subim3}
+                \label{fig:vardim_tempo_H}
             \end{subfigure}
             \caption{Custo computacional em função da dimensão do problema sob o ponto de vista do tempo de processamento (a) SIMPLEX, (b) Pontos Interiores, (c) Híbrido.}
-            \label{fig:image2}
+            \label{fig:vardim_tempo}
         \end{figure}
-        \FloatBarrier
-    \subsection{Número de iterações X Dimensão do Problema}    
-        \FloatBarrier
+        
+    \subsubsection{Número de iterações X Dimensão do Problema}    
+        
         \def \namefilepath {data/data02_tbl_dim_N_Iter.txt}
         \writetable{\namefilepath }{Número de iterações}
-        \begin{figure}[h!]
+        \begin{figure}[H]
             \begin{subfigure}{0.3\textwidth}
                 \centering
-                \plotline{\namefilepath }{Simplex}{Iterações x Dimensão}
+                \plotlineI{\namefilepath }{Simplex}{Iterações x Dimensão}
                 \caption{Simplex}
-                \label{fig:subim1}
+                \label{fig:vardim_iter_S}
             \end{subfigure}
             \hfill
             \begin{subfigure}{0.3\textwidth}
                 \centering
-                \plotline{\namefilepath }{PI}{Iterações x Dimensão}
+                \plotlineI{\namefilepath }{PI}{Iterações x Dimensão}
                 \caption{PI}
-                \label{fig:subim2}
+                \label{fig:vardim_iter_PI}
             \end{subfigure}
             \hfill
             \begin{subfigure}{0.3\textwidth}
                 \centering
-                \plotline{\namefilepath }{Hibrido}{Iterações x Dimensão}
+                \plotlineI{\namefilepath }{Hibrido}{Iterações x Dimensão}
                 \caption{Hibrido}
-                \label{fig:subim3}
+                \label{fig:vardim_iter_H}
             \end{subfigure}
             \caption{Custo computacional em função da dimensão do problema sob o ponto de vista do número de iterações (a) SIMPLEX, (b) Pontos Interiores, (c) Híbrido.}
-            \label{fig:image2}
+            \label{fig:vardim_iter}
         \end{figure}        
-        \FloatBarrier
-    \subsection{Erro percentual da função objetivo X Dimensão do Problema}
+        
+    \subsubsection{Erro percentual da função objetivo X Dimensão do Problema}
         \writetable{data/data03_tbl_err_perc_fobj.txt}{Erro percentual da função objetivo}
-    \subsection{Erro percentual da solução X Dimensão do Problema}
+    \subsubsection{Erro percentual da solução X Dimensão do Problema}
         \writetable{data/data04_tbl_err_perc_sol.txt}{Erro percentual da solução}
-    \subsection{Conclusão}
-
-
-    
-    \newpage

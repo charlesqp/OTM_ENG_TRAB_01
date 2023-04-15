@@ -1,0 +1,61 @@
+ \subsubsection{Tempo de Processamento para a análise da variação do gap de dualidade para diferentes dimensões para o algoritmo Híbrido} 
+    \writetable{data/data17_tbl_gap_tempoH.txt}{Tempo} 
+
+\subsubsection{Número de iterações para a análise da variação do gap de dualidade para diferentes dimensões para o algoritmo Híbrido} 
+    \writetable{data/data18_tbl_gap_N_iterH.txt}{Tempo} 
+
+        \begin{figure}[H]
+            \begin{subfigure}{0.5\textwidth}
+                \centering
+                \begin{tikzpicture}[scale=0.8]
+                    \begin{axis}[
+                        ymin=-2.7e-3,
+                        xlabel={Dimensão},
+                        ylabel={Tempo de execução [S]},
+                        title={Dimensão x Tempo},
+                        legend pos=south east,
+                        legend entries={{gap=1e-1},{gap=1e-2},{gap=1e-4},{gap=1e-6},{gap=1e-8},{gap=1e-10}},
+                        ymajorgrids=true]
+                        \addplot table [x=n,y=0.1]{data/data17b_plt_gap_tempoH.txt};
+                        \addplot table [x=n,y=0.01]{data/data17b_plt_gap_tempoH.txt};
+                        \addplot table [x=n,y=0.0001]{data/data17b_plt_gap_tempoH.txt};
+                        \addplot table [x=n,y=0.000001]{data/data17b_plt_gap_tempoH.txt};
+                        \addplot table [x=n,y=0.00000001]{data/data17b_plt_gap_tempoH.txt};
+                        \addplot table [x=n,y=1E-10]{data/data17b_plt_gap_tempoH.txt};
+                    \end{axis}           
+                \end{tikzpicture}
+                \caption{ }
+                \label{fig:var_gap_tempo_H}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}{0.5\textwidth}
+                \centering
+                \begin{tikzpicture}[scale=0.8]
+                    \begin{axis}[
+                        ymin=0,
+                        xlabel={Dimensão},
+                        ylabel={Número de Iterações},
+                        title={Dimensão x Iteração},
+                        legend pos=south east,
+                        legend entries={{gap=1e-1},{gap=1e-2},{gap=1e-4},{gap=1e-6},{gap=1e-8},{gap=1e-10}},
+                        ymajorgrids=true]
+                        \addplot table [x=n,y=0.1]{data/data18b_plt_gap_N_iterH.txt};
+                        \addplot table [x=n,y=0.01]{data/data18b_plt_gap_N_iterH.txt};
+                        \addplot table [x=n,y=0.0001]{data/data18b_plt_gap_N_iterH.txt};
+                        \addplot table [x=n,y=0.000001]{data/data18b_plt_gap_N_iterH.txt};
+                        \addplot table [x=n,y=0.00000001]{data/data18b_plt_gap_N_iterH.txt};
+                        \addplot table [x=n,y=1E-10]{data/data18b_plt_gap_N_iterH.txt};
+                    \end{axis}           
+                \end{tikzpicture}
+                \caption{ }
+                \label{fig:var_gap_iter_H}
+            \end{subfigure}        
+            \caption{Análise da sensibilidade do passo (a) Tempo de processamento (b) Número de Iterações.}
+            %\label{fig:image2}
+        \end{figure}
+
+\subsection{Erro percentual da função objetivo para o algoritmo Híbrido} 
+    \writetable{data/data22_tbl_gap_err_per_fobjH.txt}{Tempo} 
+    
+\subsection{Erro percentual da solução para o algoritmo Híbrido}
+    \writetable{data/data23_tbl_gap_err_per_solH.txt}{Tempo} 

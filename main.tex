@@ -13,6 +13,7 @@
 \usepackage{amsthm,amssymb,amsfonts,amsmath}
 \usepackage{psfrag}
 \usepackage{booktabs}
+\usepackage{multirow}
 \usepackage{enumitem}
 \usepackage{colortbl,booktabs}
 \usepackage{enumerate}
@@ -38,7 +39,7 @@ tikz
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{graphicx}
-
+\usepackage{float}
 
 \pgfplotstableset{% global config, for example in the preamble
   every head row/.style={before row=\toprule,after row=\midrule},
@@ -46,12 +47,131 @@ tikz
 }
 \pgfplotsset{compat=1.18}
 
-
-
 \begin{document}
 \input{00_capa} 
-\input{01_VarDimen} 
-\input{02_VarPasso} 
-\input{03_VarGap}
-\input{04_Chaveamento}
+\section{Experimentos realizados}
+
+    Os algoritmos utilizados para obtenção dos resultados que solucionam os problemas de programação linear complexos são: SIMPLEX, Pontos Interiores e Híbrido do SIMPLEX e PI com Chaveamento via Método de Murty. 
+    
+    Ressalta-se todos os resultados de tempo de execução foram obtidos por meio dos comandos tic e toc do Matlab\textregistered. Para cada resultado obtido, realizaram-se dez execuções, através das quais foram calculadas as médias do tempo disposto. Isto foi efetuado a fim de minimizar a variabilidade do tempo de execução, devido a interferência dada por outros programas rodando em plano de fundo do computador.
+    
+    \subsection{Variação da Dimensão no espaço}
+    
+        Na primeira análise estudou-se os resultados dos algoritmos de solução de problemas de programação linear em relação à variação da dimensão do problema. Nesse caso, os valores dos parâmetros de entrada do método de Pontos Interiores, o gap de dualidade e o passo, foram fixados em $10^{-2}$ e $0.5$ respectivamente.  
+        
+        Inicialmente avaliou-se o custo computacional de cada um dos algoritmos, considerando problemas de dimensão variando na proporção de quatro em quatro, começando da dimensão n=2 até n=26. Nas tabelas a seguir apresentou-se o tempo de processamento e o número de iterações versus a dimensão do problema para cada algoritmo analisado.
+
+        \input{01_VarDimen}
+    
+        \subsubsection{Conclusão}
+
+            Observando-se os gráficos da figura \ref{fig:vardim_tempo}, que apresenta o custo computacional em função da dimensão do problema, sob o ponto de vista do tempo de processamento em (s). Pode-se concluir que o tempo de execução do algoritmo Simplex possui relação exponencial ao número de dimensões do problema de Klee-Minty.
+            
+            Para os algoritmos de Pontos Interiores e Hibrido o mesmo não se confirma. Para estes algoritmos o tempo de execução observado não é sensível ao número de dimensões, assemelhando-se a um valor constante. Mesmo para dimensões cujo tempo de execução se torna proibitivo utilizando o algoritmo Simplex, o algoritmo de Pontos Interiores e o algoritmo Hibrido performam o cálculo no mesmo tempo que levariam para problemas de dimensões de ordem inferior.
+
+            Uma hipótese que talvez possa explicar a variação não linear do tempo de execução do algoritmo em relação ao número de iterações é que maiores dimensões do problema implicam na manipulação de matrizes maiores. 
+            
+            O mesmo comportamento pode ser observado na figura \ref{fig:vardim_iter} que apresenta o custo computacional em função da dimensão do problema, sob o ponto de vista do número de iterações do algoritmo empregado. Pode-se concluir que o número de iterações do algoritmo Simplex possui relação exponencial ao número de dimensões do problema de Klee-Minty, assim como previsto pelo valor teórico de $N Iter = 2 ^{dim}$. De fato, o tempo de execução é diretamente proporcional ao número de iterações.
+
+            Desta maneira, pode-se observar pela análise da figura \ref{fig:vardim_iter_PI} e \ref{fig:vardim_iter_S} que o número de iterações dos algoritmos de Pontos Interiores e Híbrido converge para um valor constante que não depende do número de dimensões. O algoritmo de Pontos interiores converge para um valor médio de 10 iterações para elevadas dimensões enquanto o algoritmo Híbrido converge para 11 iterações. Isso se deve ao fato do algoritmo Hibrido executar uma única iteração de Simplex após a execução do algoritmo de Pontos Interiores.
+
+            Sob o ponto de vista dos erros percentuais da função objetivo e da solução, é possível concluir pela observação da tabela das figuras 5 e 6, que o algoritmo Simplex sempre zera ambos os erros para qualquer número de dimensões que o problema de Klee-Minty possua. Entretanto, pode-se observar que o algoritmo de Pontos interiores atinge valores de erros tão pequenos quanto se queira. Estes são configuráveis pelo valor escolhido para o gap de dualidade. 
+
+            Para o algoritmo Hibrido é possível notar que este sempre zera ambos os erros com a adição de apenas 1 iteração a mais quando comparado com o algoritmo de pontos interiores.
+
+            Sob todas estas observações é possível afirmar que o algoritmo Hibrido é preferível ao Simplex para a resolução do problema de Klee-Minty para dimensões acima de 2 sob os aspectos considerados de custo computacional, erro da função objetivo e erro da solução.
+            
+        \newpage
+    
+    \subsection{Variação do Passo}
+    
+        Na avaliação do passo, considerou-se o algoritmo de Pontos Interiores e o algoritmo híbrido dos métodos SIMPLEX e PI chaveado por meio do método Murty. Nessa análise, o gap de dualidade foi fixado em $10^{-6}$, enquanto o passo foi variado em valores entre 0 e 1. O gap de dualidade foi fixado em $10^{-6}$ para que o seu valor não influenciasse de forma significativa no estudo da variação do passo. A análise do efeito dessa variação  considerou os diferentes valores de dimensão do problema (n), a fim de avaliar o comportamento dos algoritmos em função da dimensão do problema de Klee-Minty sob o ponto de vista do passo. 
+        
+        Os resultados obtidos para essa análise, considerando apenas o algoritmo de Pontos Interiores, são apresentados nas tabelas a seguir.
+
+        \input{02_VarPasso} 
+
+        Os resultados obtidos para essa análise, considerando apenas o algoritmo Hibrido, são apresentados nas tabelas a seguir.
+        
+        \input{03_VarPasso_H}
+
+        \subsubsection{Conclusão}
+        
+            Observando-se os gráficos da figura \ref{fig:varpasso_tempo_PI}, que apresenta o custo computacional em função do tamanho do passo do algoritmo de pontos Interiores, para diferentes dimensões do problema e sob o ponto de vista do tempo de processamento em (s). Pode-se concluir que o tempo de execução do algoritmo de Pontos Interiores é pouco sensível a variação do passo para diferentes valores do número de dimensões do problema de Klee-Minty.
+            
+            Observando-se os gráficos da figura \ref{fig:varpasso_Iter_PI}, que apresenta o custo computacional em função do tamanho do passo do algoritmo de pontos Interiores, para diferentes dimensões do problema e sob o ponto de vista do número de iterações do algoritmo empregado. Pode-se concluir que o número de iterações do algoritmo de Pontos Interiores é pouco sensível a variação do passo para diferentes valores do número de dimensões do problema de Klee-Minty. Na verdade é constante com relação ao tamanho do passo.
+
+            Uma hipótese que talvez possa explicar a variação não linear do tempo de execução do algoritmo em relação ao número de iterações é que maiores dimensões do problema implicam na manipulação de matrizes maiores.
+
+            Sob o ponto de vista dos erros percentuais da função objetivo e da solução, é possível concluir pela observação da tabela das figuras 10 e 11, que o algoritmo de Pontos Interiores não é capaz de zerar ambos os erros e que esta incapacidade não depende do tamanho do passo para problemas de dimensão até $n=26$.  
+
+            Para o algoritmo Hibrido é possível notar que este possui quase as mesmas características do algoritmo de Pontos interiores no que diz respeito ao tempo de execução e número de iterações. O valor do passo escolhido não interfere nestas variáveis sensivelmente. Em relação aos erros da função objetivo e da solução, o passo não interfere na capacidade do algoritmo hibrido de zerar ambos os erros com a adição de apenas 1 iteração a mais quando comparado com o algoritmo de pontos interiores.
+
+            Sob todas estas observações é possível afirmar que os algoritmos de Pontos interiores e Hibrido são pouco sensíveis a variação do passo para a resolução do problema de Klee-Minty. Ambos mantém suas características de desempenho atreladas ao valor do número de dimensões.
+        
+        %\newpage
+    
+    \subsection{Variação do Gap de Dualidade}
+
+        Na análise dessa seção, avaliou-se o esforço computacional quanto a variação do gap de dualidade para os algoritmos PI e Híbrido. Nessa análise o passo é fixado em $0.95$ e são considerados diferentes valores de dimensão (n). Além disso, o gap de dualidade varia entre os valores $10^{-1}$ e $10^{-10}$.
+        
+        Os resultados para a análise da sensibilidade do gap de dualidade referentes à execução do algoritmo de Pontos Interiores, são apresentados nas tabelas a seguir.
+
+        \input{04_VarGap}
+
+        Os resultados para a análise da sensibilidade do gap de dualidade referentes à execução do algoritmo Híbrido, são apresentados nas tabelas a seguir.
+
+        \input{05_VarGap_H}
+        
+        \subsubsection{Conclusão}
+
+            Observando-se os gráficos da figura \ref{fig:var_gap_tempo_PI}, que apresenta o custo computacional em função do gap de dualidade do algoritmo de pontos Interiores, para diferentes dimensões do problema e sob o ponto de vista do tempo de processamento em (s). Pode-se concluir que o tempo de execução do algoritmo de Pontos Interiores é sensível a valores de gap muito pequenos para todos valores do número de dimensões do problema de Klee-Minty. 
+            
+            Observando-se os gráficos da figura \ref{fig:var_gap_Iter_PI}, que apresenta o custo computacional em função do gap de dualidade do algoritmo de pontos Interiores, para diferentes dimensões do problema e sob o ponto de vista do número de iterações do algoritmo empregado. Pode-se concluir que o número de iterações do algoritmo Híbrido é sensível a valores de gap muito pequenos para todos valores do número de dimensões do problema de Klee-Minty. Para valores de gap maiores ou iguais a $1e-2$ há uma convergência do número de iterações e este volta a ser dependente unicamente do número de dimensões.
+ 
+            Sob o ponto de vista dos erros percentuais da função objetivo e da solução, é possível concluir pela observação da tabela das figuras 20 e 21, que o algoritmo de Pontos Interiores não é capaz de zerar ambos os erros e que esta incapacidade não depende do gap de dualidade. Estes erros estão relacionados apenas ao valor da dimensão.  
+
+            Para o algoritmo Hibrido é possível notar que este possui quase as mesmas características do algoritmo de Pontos interiores no que diz respeito ao tempo de execução e número de iterações. O valor do gap escolhido não interfere nestas variáveis sensivelmente, exceto para valores de gap menores que $1e-2$.  Em relação aos erros da função objetivo e da solução, o passo não interfere na capacidade do algoritmo hibrido de zerar ambos os erros com a adição de apenas 1 iteração a mais quando comparado com o algoritmo de pontos interiores.
+
+            Sob todas estas observações é possível afirmar que, exceto para valores de gap muito pequenos, menores que $1e-2$, os algoritmos de Pontos interiores e Hibrido são pouco sensíveis a variação do passo para a resolução do problema de Klee-Minty. Ambos mantém suas características de desempenho atreladas ao valor do número de dimensões.
+
+        \newpage
+        
+    \subsection{Análise do chaveamento entre os métodos PI e SIMPLEX}
+    
+        A grande questão relacionada ao algoritmo Híbrido é quando se deve chavear do algoritmo PI para o SIMPLEX. No intuito de analisar esse chaveamento deve-se realizar um melhor detalhamento quanto aos resultados relacionados ao esforço computacional, considerando as soluções obtidas antes e depois do chaveamento via método de Murty. Dessa forma, os experimentos devem considerar a execução do algoritmo Híbrido para diferentes dimensões, gap de dualidade fixado em a $10^{-6}$ e passo igual a $0.95$. Os resultados desses experimentos serão dispostos na Tabela a seguir:
+        
+        \input{06_Chaveamento}
+        
+        \subsubsection{Conclusão}
+
+        Sob o estrito ponto de vista de custo computacional, levando em conta apenas o tempo de execução do algoritmo em função do número de dimensões do problema de Klee-Minty. A escolha mais robusta do ponto de chaveamento entre os algoritmos Simplex e Pontos interiores acontece quando o número de dimensões do problema é maior ou igual a $n=6$. Tendo em vista que o tempo de execução e o número de iterações para este algoritmo permanece praticamente constante para qualquer valor do número de dimensões e é sempre menor ou igual aos seus correspondentes para o algoritmo simplex a partir de $n=6$.
+
+        Considerando também que o algoritmo de Pontos interiores não zera absolutamente o erro da função objetivo e da solução, é interessante utilizar o algoritmo hibrido a partir deste ponto para garantir a convergência absoluta da solução e da função objetivo para os seus valores exatos.
+
+        \newpage
+
+    \subsection{Análise de sensibilidade quanto ao parâmetro Valb}
+
+     Na avaliação do parâmetro Valb, considerou-se o algoritmo Simplex, o algoritmo de Pontos Interiores e o algoritmo híbrido dos métodos SIMPLEX e PI chaveado por meio do método Murty. Nessa análise, o gap de dualidade foi fixado em $10^{-6}$, e o passo foi fixado em $0.95$. Enquanto o valor do parâmetro valb foi variado em valores entre 10 e 100 em escala logarítmica.A análise do efeito dessa variação  considerou os diferentes valores de dimensão do problema (n), a fim de avaliar o comportamento dos algoritmos em função da dimensão do problema de Klee-Minty sob o ponto de vista do parâmetro Valb. 
+        
+        
+        
+        \input{07_parametroValb}
+
+        \subsubsection{Conclusão}
+
+        
+    
+        \newpage
+        
+    \subsection{Análise de sensibilidade quanto ao ponto inicial}
+            
+        \input{08_PontoInicialPar}
+        
+        \subsubsection{Conclusão}
+
+        
+    
+        \newpage
 \end{document}
